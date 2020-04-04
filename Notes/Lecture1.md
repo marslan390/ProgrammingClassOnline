@@ -1,3 +1,4 @@
+```
 1- Basic Javascript along with that HTML
 2- TypeScript
 3- Frontend Framework (React, Angular2+)
@@ -121,3 +122,4 @@ anotherLongArray.pop()
 "another"
 anotherLongArray
 (6) ["one", "hellow", "two", "world", "another value", "test"]
+```

@@ -1,0 +1,102 @@
+<html>
+    <script>
+        // Self invoke function
+        (() => {
+            // Object, dictionary(key: value), json (javascript object notation) 
+            /** 
+             * Rules
+             * Curly parenthices start - end
+             * Between that we could assign key, value
+             * type of value could be any
+            */
+        const obj = {
+            id: 1,
+            firstName: "Arslan",
+            lastName: "Sajid",
+            email: "abc@gamil.com",
+            phone: "123456"
+        }
+        console.log(obj)
+        // how to access property of object??? (i.e. firstName)
+        console.log(obj.firstName, "accessing value with dot")
+        console.log(obj["firstName"], "accessing value with key as string")
+
+        // Advantage of object, dictionary or json
+        // You can acccess any property directly
+
+        // Primitive (i.e. boolean , number, string) ==> By value ==> separate memory allocate
+        // Non Primitive (array, object) ==> By reference
+        // by reference in case of array
+        const arr2 = [1, 2]
+        const arr3 = arr2
+        const arr4 = arr3
+        console.log(arr2, "arr2 before update")
+        console.log(arr3, "arr3 before update")
+        console.log(arr4, "arr4 before update")
+        arr2[0] = 5
+        arr3[1] = 5
+        console.log(arr2, "arr2 after update")
+        console.log(arr3, "arr3 after update")
+        console.log(arr4, "arr4 after update")
+
+        // by reference in case of object
+        const userInfo = obj
+        console.log(obj, "obj before update")
+        console.log(userInfo, "userInfo before update")
+        obj.firstName = "Muhammad Arslan"
+        userInfo.phone = "654321"
+        console.log(obj, "obj after update")
+        console.log(userInfo, "userInfo after update")
+
+        // concatination???
+        let fullName = userInfo.firstName + " " + userInfo.lastName // old way
+        console.log(fullName, "concatination with fullName with old way")
+        fullName = `${userInfo.firstName} ${userInfo.lastName}` // new way
+        console.log(fullName, "concatination with fullName with new way")
+
+        // What is a Function? ==> Google
+        // A function is a subprogram designed to perform a particular task.
+        // syntax => function(keyword) functionName() {} ==> without arrow
+        /** 
+         * firstName, lastName are the function arguments, parameters
+        */
+        function getFullName(firstName, lastName) {
+            return `${firstName} ${lastName}`
+        }
+        console.log(getFullName(userInfo.firstName, userInfo.lastName))
+        console.log(getFullName("ABC", "XYZ"))
+        const userInfo2 = {
+            id: 2,
+            firstName: "Haroon",
+            lastName: "Raza",
+            email: "abc@gamil.com",
+            phone: "123456"
+        }
+        console.log(getFullName(userInfo2.firstName, userInfo2.lastName))
+
+        // syntax: functionName = () => {}
+        getFullName = (firstName, lastName) => {
+            return `${firstName} ${lastName}`
+        }
+        getFullName = (firstName, lastName) => `${firstName} ${lastName}`
+        console.log(getFullName(userInfo2.firstName, userInfo2.lastName))
+
+        //Note if you don't return anything in a function by default it would return undefined
+
+        })()
+    </script>
+    <body>
+        <h2>Today Agenda</h2>
+        <ul>
+            <li>Object</li>
+            <li>Primitive vs Non Primitive</li>
+            <li>Function</li>
+        </ul>
+        <h2>Next Class</h2>
+        <ul>
+            <li>Complex Object</li>
+            <li>Array of objects</li>
+            <li>Callback function</li>
+        </ul>
+    </body>
+</html>

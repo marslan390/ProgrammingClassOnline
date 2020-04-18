@@ -1,0 +1,97 @@
+<html>
+    <script>
+        // Self invoke function
+        (() => {
+
+            // difference b/w slice and splice???
+            // The splice() method changes the contents of an array by removing, addding or replacing existing elements and/or adding new elements in place.
+            // First argument of splice method expects the index of element from which you want start delete
+            // 2nd argument of splice method expects the number of deleted items/elements
+            const arr = [5, 6, 8, 8, 8]
+            console.log(arr, "before remove array")
+
+            // Splice case 1: Remove/Delete
+            // arr.splice(2, 1)
+            // console.log(arr, "arr after remove by calling arr.splice(2, 1)")
+            arr.splice(2, 2)
+            console.log(arr, "arr after remove by calling arr.splice(2, 2)")
+
+            arr.push(9) // [5, 6, 8, 9]
+
+            // Splice case 2: Insert/Add between
+            arr.splice(2, 0, 7, 8, 9) // [5, 6, 7, 8, 9, 8, 9]
+            // Question??? I want to insert 4 at first place
+            // answers:
+            // Danial: arr.splice(0,0,4) // True
+            // Usman Aslam, Nida:  arr.splice(0, 0, 4) // True
+            // Usman Zul: arr.splice(0, 0, 2) ==> (0, 0, 4)
+            // Ali: ???? arr.splice(0, 0, 4)
+            // Haroon: [0, 0, 4] ==> arr.splice(0, 0, 4)
+            arr.splice(0, 0, 4) // [4, 5, 6, 7, 8, 9, 8, 9]
+
+            // Splice case 3: Replace
+            // Question: I want my array [4, 5, 6, 7, 8, 9, 8, 9] to be like [4, 5, 6, 7, 8, 9, 10, 9]
+            // Arslan: arr.splice(6, 1, 10) // True [4, 5, 6, 7, 8, 9, 10, 9]
+            // Haroon: arr.splice(6,2,10) // False [4, 5, 6, 7, 8, 9, 10]
+            // Ali: arr.splice(6,0,10) // [4, 5, 6, 7, 8, 9, 10, 8, 9]
+            // Nida: arr.splice(5,6,10) // [4, 5, 6, 7, 8, 10]
+            // Danial: arr.splice(6,0,0,10) // [4, 5, 6, 7, 8, 9, 0, 10, 8, 9]
+            // Usman Aslam: arr.aplice(6,1) arr.aplice(6,0,10) // True 
+            // [4, 5, 6, 7, 8, 9, 9]
+            // [4, 5, 6, 7, 8, 9, 10, 9]
+            // Usman Zul: arr.splice(6,0,10) // [4, 5, 6, 7, 8, 9, 10, 8, 9]
+            arr.splice(6, 1, 10) // Final
+
+            console.log(arr, "Final Array")
+
+
+            // update string
+            // Question: what to change const name = "Danyal" to "Danial" 
+            let name = "Danyal";
+            console.log(name.length, "Name length")
+            name[3] = "i" // trying to change, but didn't successful, as it's primitive type which follows by value
+            console.log(name, "trying to update exiting value by index")
+            // soution????
+            // name = "Danial" compiler error due to const
+            // let name = "Danyal"
+            name = "Danial"
+            console.log(name, "Final value")
+
+            const object2 = {
+                name: "Danial Waris",
+                age: 21,
+                PH: 234567
+            }
+
+            // Update rule:
+            // Always use index in case of the Array
+            // Always use key in case of object
+            object2.PH = 03339787675
+            object2["PH"] = 03339787675
+            console.log(object2)
+
+            const obj = {
+                4: 0,
+                1: 1,
+                2: 2
+            }
+            obj[4] = 19
+            console.log(obj)
+            // Assignent sort array [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            // Quiz: splice
+        })()
+    </script>
+    <body>
+        <h2>Today Agenda</h2>
+        <ul>
+            <li>Array splice</li>
+            <li>Question answers regarding array, objects</li>
+        </ul>
+        <h2>Next Class</h2>
+        <ul>
+            <li>Complex Object</li>
+            <li>Array of objects</li>
+            <li>Callback function</li>
+        </ul>
+    </body>
+</html>

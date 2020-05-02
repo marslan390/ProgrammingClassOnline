@@ -1,0 +1,120 @@
+<html>
+  <body>
+    <h2>Today Agenda</h2>
+    <ul>
+      <li>callback function more in detail</li>
+    </ul>
+    <h2>Next Class</h2>
+    <ul></ul>
+    <h2>User List</h2>
+    <div id="userList"></div>
+  </body>
+  <script>
+    // Self invoke function
+    (() => {
+      // Javascript build functions which uses callbacks
+      const users = [
+        {
+          firstName: "Muhammad Arslan",
+          lastName: "Sajid",
+          email: "abc@gmail.com",
+          phone: 0333,
+          isVarified: true,
+          address: "301 NY, United States",
+          isEmailSend: true,
+        },
+        {
+          firstName: "Usama",
+          lastName: "DEF",
+          email: "abc@gmail.com",
+          phone: 0333,
+          isVarified: false,
+          address: "301 NY, United States",
+          isEmailSend: true,
+        },
+        {
+          firstName: "Usman",
+          lastName: "DEF",
+          email: "abc@gmail.com",
+          phone: 0333,
+          isVarified: true,
+          address: "301 NY, United States",
+          isEmailSend: false,
+        },
+      ];
+
+      // filter, which calls the number of times as per array length
+      // item would not include if callback funtion returns, undefined, null or false
+      let filterUsers = users.filter((user) => console.log(user));
+      console.log(
+        [...filterUsers],
+        "As we are returing undefined, due to that this array is empty"
+      );
+      filterUsers = users.filter((user) => user);
+      console.log(
+        [...filterUsers],
+        "As we are returing same user, due to that filterUsers array is same to users"
+      );
+      // real time scaniors
+      // 1: If we want to see the unverified users
+      filterUsers = users.filter((user) => !user.isVarified);
+      console.log(
+        [...filterUsers],
+        "We are returing users with isVarified Status"
+      );
+      // 2: Find the hacker
+      filterUsers = users.filter(
+        (user) => user.isVarified && !user.isEmailSend
+      );
+      console.log([...filterUsers], "we found some hacker users!");
+      // 3: Let's say we want to get the list of users who has been send email successfully!
+      // 4: Let's say we want to get the list of users who has not been send email succeffuly!
+      // below i am using normal function in callback
+      filterUsers = users.filter(function (user) {
+        return !user.isVarified;
+      });
+
+      // 5: search user based on name
+      const searchText = "usmz";
+      let searchedUsers = users.filter(
+        (user) => user.firstName.indexOf(searchText) !== -1
+      );
+      console.log(
+        searchedUsers,
+        `Searched Users with case sensitive searchText :${searchText}`
+      );
+
+      searchedUsers = users.filter(
+        (user) =>
+          user.firstName
+            .toLocaleLowerCase()
+            .indexOf(searchText.toLocaleLowerCase()) !== -1
+      );
+      console.log(
+        searchedUsers,
+        `Searched Users with case insensitive searchText :${searchText}`
+      );
+
+      // map callback, returns new list
+      let mapedUsers = users.map((user) => user.firstName);
+      console.log(mapedUsers, "Only getting the firstName of all users");
+      // requirement = [{id: 1, name: ''},...]
+      mapedUsers = users.map((user, index) => ({
+        id: index + 1,
+        name: user.firstName,
+      }));
+      console.log(mapedUsers, "mapped users objects with id property");
+
+      // forEach callback
+      let html = "<ul>";
+      users.forEach((user) => {
+        html += `<li>${user.firstName}</li>`; // ==> html = html + `<li>${user.firstName}</li>
+      });
+      html += "</ul>";
+
+      // Assignement?? solve that problem to render user list
+      const $htmlElement = document.getElementById("userList");
+      $htmlElement.html(html);
+    })();
+  </script>
+</html>

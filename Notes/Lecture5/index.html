@@ -44,7 +44,7 @@
       ];
 
       // filter, which calls the number of times as per array length
-      // item would not include if callback funtion returns, undefined, null or false
+      // item would not include if callback funtion returns, undefined, null, 0, false, or  '' (empty string)
       let filterUsers = users.filter((user) => console.log(user));
       console.log(
         [...filterUsers],

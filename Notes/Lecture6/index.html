@@ -1,0 +1,137 @@
+<html>
+  <body>
+    <h2>Today Agenda</h2>
+    <ul>
+      <li>if if</li>
+      <li>if else</li>
+      <li>switch</li>
+      <li>loop</li>
+    </ul>
+    <h2>Next Class</h2>
+    <ul></ul>
+  </body>
+  <script>
+    // Self invoke function
+    (() => {
+      // Questions from prev class
+      let studentRecords = [
+        {
+          studentName: "AliRaza",
+          city: "Sahiwal",
+
+          studentAddress: {
+            currentAddress: "Sahiwal",
+            parmenentAddress: "Tandlianwala",
+          },
+
+          studentContactInformation: {
+            personalContactNo: "03077534255",
+            fatherContactNo: "03037892935",
+          },
+
+          statusVerification: {
+            isVerified: true,
+            emailSend: false,
+          },
+        },
+        {
+          studentName: "UmerRaza",
+          city: "Sahiwal",
+
+          studentAddress: {
+            currentAddress: "Sahiwal",
+            parmenentAddress: "Tandlianwala",
+          },
+
+          studentContactInformation: {
+            personalContactNo: "03079864255",
+            fatherContactNo: "03037890935",
+          },
+
+          statusIsVerified: {
+            isVerified: false,
+            emailSend: true,
+          },
+        },
+      ];
+      console.log("array length", studentRecords.length);
+
+      // ali ==> let filterStudentRecord = obj.filter((user) => user.isVerified);
+      // usman zulfiqar ==> sutdentRecords.filter((student)=> student.statusVerification.isverified) correct
+      // danial ==> studentRecords.filter((user)=>user[0].statusVerification.isVerified != true) wrong
+
+      // *******Note: You all need more practice
+
+      // if if
+      let getPhoneNumber = (networkType) => {
+        if (networkType === "jazz") {
+          return "0300 9987866757";
+        }
+        if (networkType === "ufone") {
+          return "0333 09990889897";
+        }
+        return "Invalid networkType";
+      };
+      /* console.log(getPhoneNumber(), "without passing value");
+      console.log(getPhoneNumber("jazz"), "with passing value");
+      console.log(getPhoneNumber("jazz"), "with passing value");
+      console.log(getPhoneNumber("ufone"), "with passing value");
+      console.log(getPhoneNumber("zong"), "with passing value");*/
+
+      // if else
+      getPhoneNumber = (networkType) => {
+        let phoneNumber = "";
+        if (networkType === "jazz") {
+          phoneNumber = "0300 9987866757";
+        } else if (networkType === "ufone") {
+          phoneNumber = "0333 09990889897";
+        } else if (networkType === "zong") {
+          phoneNumber = "0313 988978686";
+        } else {
+          phoneNumber = "Invalid networkType";
+        }
+        return phoneNumber;
+      };
+      /*console.log(getPhoneNumber(), "without passing value");
+      console.log(getPhoneNumber("jazz"), "jazz");
+      console.log(getPhoneNumber("jazz"), "jazz");
+      console.log(getPhoneNumber("ufone"), "ufone");
+      console.log(getPhoneNumber("zong"), "zong");*/
+
+      // swtich
+      getPhoneNumber = (networkType) => {
+        let phoneNumber = "";
+        switch (networkType) {
+          case "jazz": {
+            phoneNumber = "0300 9987866757";
+            // complex logic (i.e. server call and handle it's respoonse)
+            break;
+          }
+          case "ufone": {
+            phoneNumber = "0333 09990889897";
+            break;
+          }
+          case "zong": {
+            phoneNumber = "0313 988978686";
+            break;
+          }
+          default: {
+            phoneNumber = "Invalid networkType";
+          }
+        }
+        return phoneNumber;
+      };
+      /*console.log(getPhoneNumber(), "without passing value");
+      console.log(getPhoneNumber("jazz"), "jazz");
+      console.log(getPhoneNumber("jazz"), "jazz");
+      console.log(getPhoneNumber("ufone"), "ufone");
+      console.log(getPhoneNumber("zong"), "zong");**/
+
+      // loop (for)
+      // for(variable ; condition ; increment/decrement)
+      for (let i = 5; i < 10; i++) {
+        console.log(i);
+      }
+    })();
+  </script>
+</html>

@@ -29,8 +29,10 @@
 
       const longApiCall = () => {
         return new Promise((resolve, reject) => {
+          console.log("before resolve, reject");
           resolve({ id: 1 });
           reject("user already exists");
+          console.log("after resolve, reject");
         });
       };
       const response = longApiCall();

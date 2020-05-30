@@ -1,0 +1,63 @@
+<html>
+  <body>
+    <h2>Today Agenda</h2>
+    <ul>
+      <li>async - await</li>
+    </ul>
+    <h2>Next class</h2>
+    <ul>
+      <li>Assignment</li>
+      <li>Http calls (GET, PUT, POST, DELETE)</li>
+    </ul>
+  </body>
+  <script>
+    // Self invoke function
+    (async () => {
+      // advance concept if someone intereste : https://medium.com/@theflyingmantis/javascript-single-threaded-non-blocking-asynchronous-concurrent-language-ffae97c57bef
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+      // sync ==> blocks/freez/non-responsive the browser UI
+      /*const name = "arslan";
+        setTimeout(() => console.log("timeout done!"), 0);
+        console.log(name);
+        console.log("a");
+        console.log("b");
+        // Promise (If we don't want to freez our UI)
+        Promise.resolve(console.log("promise resolved"));
+        // example setTimeout
+        setTimeout(() => console.log("async done!"), 5000);*/
+
+      const longApiCall = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ id: 1 });
+            reject("user already exists");
+          }, 5000);
+        });
+      };
+      // utilize longApiCall promise as then, catch
+      let response = longApiCall();
+      response
+        .then((data) => {
+          // TODO: we could notify the user by showing message
+          console.log("api call successfully executed with then-catch", data);
+          console.log("---------------------------------");
+        })
+        .catch((error) => {
+          console.log("api call failed with then-catch", error);
+        });
+      console.log("after longApiCall with then, catch");
+
+      // 2nd implementation with async-await
+      try {
+        //setTimeout(() => console.log("consoling after 5 seconds"), 5000);
+        response = await longApiCall(); // would wait 5 seconds at that line because the promise under longApiCall is resolving after 5 seconds
+        // TODO: we could notify the user by showing message
+        console.log("api call successfully executed wth async-await", response);
+        console.log("after longApiCall with async-await");
+        // 2nd implementation with async-await
+      } catch (e) {
+        console.log("api call failed with async-await", e);
+      }
+    })();
+  </script>
+</html>

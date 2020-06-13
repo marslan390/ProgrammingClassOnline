@@ -1,0 +1,183 @@
+<html>
+  <style>
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .container {
+      width: 350px;
+      min-width: 350px;
+      margin: 0 auto;
+    }
+    form {
+      /* width = width - padding + margin*/
+      padding: 16px;
+      margin: 0 -16px;
+    }
+    .row .label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .row .control {
+      width: 100%;
+      margin: 8px 0;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      border: 1px solid gray;
+      border-radius: 3px;
+      padding: 5px 10px;
+      font-size: 16px;
+      outline: none;
+    }
+    input[type="checkbox"] {
+      margin: 0;
+    }
+    button {
+      border: 0;
+      padding: 8px;
+      background-color: #46a1ff;
+      color: white;
+      border-radius: 3px;
+      font-size: 16px;
+      outline: none;
+      user-select: none;
+    }
+    button:hover:enabled {
+      background-color: #107ded;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <form id="frmRegister">
+        <div class="row">
+          <div class="label">First Name</div>
+          <div class="control">
+            <input type="text" id="txtFirstName" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Last Name</div>
+          <div class="control">
+            <input type="text" id="txtLastName" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Password</div>
+          <div class="control">
+            <input type="password" id="txtPassword" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Confirm Password</div>
+          <div class="control">
+            <input type="password" id="txtConfirmPassword" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Email</div>
+          <div class="control">
+            <input type="email" id="txtEmail" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="control">
+            <label>
+              <input type="checkbox" id="chkIsRobot" /> I am not a robot</label
+            >
+          </div>
+        </div>
+        <div class="row">
+          <div class="control">
+            <button disabled type="submit" id="btnRegister">
+              Regiter
+            </button>
+          </div>
+        </div>
+      </form>
+      <div id="sectionUserList" style="display:none">
+          <h1>User List</h1>
+         <table>
+             <th>
+                 <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+             </th>
+             <tbody id="tblUsersBody"></tbody>
+         </table>
+      </div>
+    </div>
+  </body>
+  <script>
+      const getUserRow = (user) =>     {
+          const row = document.createElement("tr")
+          const tdFirstName = document.createElement("td")
+          tdFirstName.innerHTML = user.firstName
+          const tdLastName = document.createElement("td")
+          tdLastName.innerHTML = user.lastName
+          const tdEmail = document.createElement("td")
+          tdEmail.innerHTML = user.email
+          row.appendChild(tdFirstName)
+          row.appendChild(tdLastName)
+          row.appendChild(tdEmail)
+          return row
+      }
+    const validateLimitControl = (value, limit, fieldName) => {
+      if (!value && fieldName) {
+        alert(`${fieldName} is missing`);
+        return;
+      }
+      const isValid = value && value.length <= 10;
+      if (!isValid && fieldName) {
+        alert(`Invalid limit for ${fieldName}`);
+      }
+      return isValid;
+    };
+
+    const validatePassowrd = (password, confirmPassword) => {
+      return !(password !== confirmPassword);
+    };
+
+    const register = (event) => {
+      event.preventDefault();
+      debugger;
+      const firstName = document.getElementById("txtFirstName").value;
+      if (!validateLimitControl(firstName, 10, "First Name")) {
+        return;
+      }
+
+      const lastName = document.getElementById("txtLastName").value;
+      if (!validateLimitControl(lastName, 5, "Last Name")) {
+        return;
+      }
+
+      const password = document.getElementById("txtPassword").value;
+      const confirmPassword = document.getElementById("txtConfirmPassword")
+        .value;
+      if (!validatePassowrd(password, confirmPassword)) {
+        return;
+      }
+      const email = document.getElementById("txtEmail").value;
+
+      const user = { firstName, lastName, password, email };
+      console.log(user);
+      document.getElementById("tblUsersBody").appendChild(getUserRow(user))
+      document.getElementById("sectionUserList").style.display = "block"
+    };
+
+    const isRobotChange = (event) => {
+      const isRobot = !event.target.checked;
+      const btnRegister = document.getElementById("btnRegister");
+      btnRegister.disabled = isRobot;
+    };
+
+    document.getElementById("frmRegister").addEventListener("submit", register);
+    document
+      .getElementById("chkIsRobot")
+      .addEventListener("change", isRobotChange);
+  </script>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>User validation form</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* The popup form - hidden by default */
+      .form-popup {
+        bottom: 10;
+        margin-left: 10%;
+        margin-bottom: 5%;
+        z-index: 1;
+      }
+
+      /* Add styles to the form container */
+      .form-container {
+        max-width: 400px;
+        padding: 10px;
+        border-top-left-radius: 2%;
+        border-top-right-radius: 2%;
+        z-index: 1;
+      }
+
+      /* Full-width input fields */
+      .form-container input[type="text"],
+      .form-container input[type="password"] {
+        width: 100%;
+        height: 40px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border-radius: 1%;
+        border: none;
+        color: black;
+        background: white;
+      }
+
+      .loginButton {
+        width: 100%;
+      }
+
+      .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      span.psw {
+        float: right;
+        padding-top: 16px;
+      }
+
+      #result-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+      }
+
+      #result-table td,
+      #result-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #result-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #result-table tr:hover {
+        background-color: #ddd;
+      }
+
+      #result-table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #292b2c;
+        color: white;
+      }
+
+      #userLoginForm {
+        display: none;
+        margin-top: 0%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="btn btn-success" style="margin-left: 17%;" onclick="reg();">
+      Register
+    </button>
+    <button class="btn btn-primary" style="width: 6%;" onclick="log();">
+      Login</button
+    ><br />
+
+    <!---------------------------------FOR REGISTER FORM VALIDATION-------------------------------->
+    <div class="form-popup" id="userValidationForm">
+      <form name="myform" class="form-container bg-dark">
+        <h3 class="text-center">
+          <span style="color: #cd2328; font-style: italic;">A</span>
+          <span style="color: #ec9018; font-style: italic;">S</span>
+          <span style="color: #6eb54f; font-style: italic;">S</span>
+          <span style="color: #5fadec; font-style: italic;">I</span>
+          <span style="color: #6c38a8; font-style: italic;">G</span>
+          <span style="color: #f5e964; font-style: italic;">N</span>
+          <span style="color: #cd2328; font-style: italic;">M</span>
+          <span style="color: #ec9018; font-style: italic;">E</span>
+          <span style="color: #f5e964; font-style: italic;">N</span>
+          <span style="color: #cd2328; font-style: italic;">T</span>
+        </h3>
+        <label for="First Name" class="text-white"><b>First Name</b></label>
+        <input
+          type="text"
+          placeholder="Enter First Name"
+          name="f_name"
+          id="f_n"
+          onkeyup="checkEmpty('btSubmit')"
+          pattern="[A-Za-z\s]{10,}"
+          title="Write at least 10 charater of your first name"
+          required
+        />
+        <label for="Last Name" class="text-white"><b>Last Name</b></label>
+        <input
+          type="text"
+          placeholder="Enter Last Name"
+          name="l_name"
+          id="l_n"
+          onkeyup="checkEmpty('btSubmit')"
+          pattern="[A-Za-z\s]{5,}"
+          title="Write at least 6 charater of your first name"
+          required
+        />
+        <label for="psw" class="text-white"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="pas"
+          onkeyup="checkEmpty('btSubmit')"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at
+        least one number and one uppercase and lowercase letter, and at least 8
+        or more characters"
+          required
+        />
+        <label for="confirmPsw" class="text-white"
+          ><b>Confirm Password</b></label
+        >
+        <input
+          type="password"
+          placeholder="Enter Confirm Password"
+          name="confirm_Password"
+          id="c_pass"
+          onkeyup="checkEmpty('btSubmit')"
+          required
+        />
+        <label for="email" class="text-white"><b>Email</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          name="email"
+          required
+          onkeyup="checkEmpty('btSubmit')"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          title="Follow the proper format of email"
+          id="em"
+        />
+
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" style="color: white;">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="box"
+              id="c_box"
+              value="1"
+              onchange="checkEmpty('btSubmit')"
+              required
+            />
+            I am not a robot check the box to submit the form!
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          value="submit"
+          class="btn btn-danger"
+          disabled
+          id="btSubmit"
+          onmouseover="runFunction()"
+        >
+          Submit Data
+        </button>
+      </form>
+    </div>
+
+    <!---------------------------------FOR LOGIN FORM VALIDATION-------------------------------->
+
+    <div class="form-popup" id="userLoginForm">
+      <form name="myform" class="form-container bg-dark">
+        <h3 class="text-center">
+          <span style="color: #cd2328; font-style: italic;">L</span>
+          <span style="color: #ec9018; font-style: italic;">O</span>
+          <span style="color: #6eb54f; font-style: italic;">G</span>
+          <span style="color: #5fadec; font-style: italic;">I</span>
+          <span style="color: #6c38a8; font-style: italic;">N</span>
+        </h3>
+
+        <label for="email" class="text-white"><b>Email</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          name="email"
+          required
+          onkeyup="checkEmptyLogin('login')"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          title="Follow the proper format of email"
+          id="email"
+        />
+        <label for="psw" class="text-white"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="password"
+          onkeyup="checkEmptyLogin('login')"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at
+            least one number and one uppercase and lowercase letter, and at least 8
+            or more characters"
+          required
+        />
+
+        <button
+          type="submit"
+          value="submit"
+          class="btn btn-danger"
+          disabled
+          id="login"
+          onclick="loginMessage();"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+
+    <!---------------------------------TABLE TO SHOW THE DATA WHEN USER FILL THE FIELDS-------------------------------->
+    <div>
+      <table id="result-table" style="margin-top: -50%; float: right;">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Password</th>
+          <th>Confirm Password</th>
+          <th>Email Address</th>
+        </tr>
+
+        <tr>
+          <td id="first"></td>
+          <td id="second"></td>
+          <td id="third"></td>
+          <td id="fourth"></td>
+          <td id="fifth"></td>
+        </tr>
+      </table>
+      <br />
+    </div>
+  </body>
+
+  <!---------------------------------SCRIPTING PORTION-------------------------------->
+  <script>
+    function checkEmpty(bt) {
+      // var bt = document.getElementById("btSubmit");
+      var f1 = document.getElementById("f_n");
+      var f2 = document.getElementById("l_n");
+      var f3 = document.getElementById("pas");
+      var f4 = document.getElementById("c_pass");
+      var f5 = document.getElementById("em");
+      var f6 = document.getElementById("c_box");
+
+      // if and else statement portions
+      if (
+        f1.value.length >= 1 &&
+        f2.value.length >= 1 &&
+        f3.value.length >= 1 &&
+        f4.value.length >= 1 &&
+        f5.value.length >= 1 &&
+        f6.checked == true
+      ) {
+        document.getElementById(bt).disabled = false;
+      } else {
+        document.getElementById(bt).disabled = true;
+      }
+    }
+
+    function runFunction() {
+      var pass = document.getElementById("pas").value;
+      var con_pass = document.getElementById("c_pass").value;
+      var f_name = document.getElementById("f_n");
+      var l_name = document.getElementById("l_n");
+      if (pass != con_pass) {
+        alert("Both passowrd do not match");
+      }
+      showResult();
+    }
+
+    let showResult = () => {
+      var f_name = document.getElementById("f_n").value;
+      var l_name = document.getElementById("l_n").value;
+      var pass = document.getElementById("pas").value;
+      var c_pass = document.getElementById("c_pass").value;
+      var email = document.getElementById("em").value;
+      document.getElementById("first").innerHTML = f_name;
+      document.getElementById("second").innerHTML = l_name;
+      document.getElementById("third").innerHTML = pass;
+      document.getElementById("fourth").innerHTML = c_pass;
+      document.getElementById("fifth").innerHTML = email;
+
+      // for store data in the local storage
+      /*  localStorage.setItem("First Name", f_name);
+        document.getElementById("first").innerHTML = localStorage.getItem(f_name);*/
+    };
+
+    // < !--------------------------------- FOR LOGIN VALIDATION -------------------------------->
+    function checkEmptyLogin(btn) {
+      var f1 = document.getElementById("password");
+      var f2 = document.getElementById("email");
+      if (f1.value.length >= 1 && f2.value.length >= 1) {
+        document.getElementById(btn).disabled = false;
+      } else {
+        document.getElementById(btn).disabled = true;
+      }
+    }
+
+    // < !--------------------------------- FOR ON CLICK ACTION -------------------------------->
+    function reg() {
+      document.getElementById("userValidationForm").style.display = "block";
+      document.getElementById("userLoginForm").style.display = "none";
+    }
+    function log() {
+      document.getElementById("userLoginForm").style.display = "block";
+      document.getElementById("userValidationForm").style.display = "none";
+    }
+  </script>
+</html>

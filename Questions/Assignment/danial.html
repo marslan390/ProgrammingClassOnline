@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecture6</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        background: linear-gradient(
+          rgba(0.5, 0.5, 0.5, 0.5),
+          rgba(0.5, 0.5, 0.5, 1)
+        );
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      }
+
+      .formHeading {
+        max-width: 650px;
+        margin: auto;
+        margin-top: 50px;
+        background: rgba(0, 0, 0, 0.794);
+        color: white;
+        text-align: center;
+        font-family: cursive;
+        font-size: 20px;
+        border-radius: 15px 15px 0px 0px;
+      }
+
+      .container {
+        color: white;
+        font-size: 15px;
+        max-width: 650px;
+        margin: auto;
+        border-radius: 0px 0px 15px 15px;
+        background: rgba(0, 0, 0, 0.2);
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        box-shadow: 0px 20px 50px rgba(255, 255, 255, 0.705);
+      }
+
+      .myForm input {
+        padding: 10px;
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid blue;
+        color: white;
+      }
+
+      .container .name h2,
+      .container .email h2 {
+        margin-right: 60px;
+      }
+
+      .container .myForm {
+        padding: 20px 0px;
+      }
+
+      .container .name h2,
+      .container .name input {
+        display: inline-block;
+      }
+
+      .container .name {
+        margin: 40px 35px;
+      }
+
+      .container .name #firstName {
+        margin-right: 30px;
+      }
+
+      .container .email {
+        margin: 20px 35px;
+      }
+
+      .container .email h2,
+      .container .email input {
+        display: inline-block;
+      }
+
+      .container .email input {
+        width: 400px;
+      }
+
+      .container .password {
+        margin: 40px 35px;
+      }
+
+      .container .password h2,
+      .container .password input {
+        display: inline-block;
+      }
+
+      .container .password h2 {
+        margin-right: 25px;
+      }
+
+      .container .password #passwordOne {
+        margin-right: 30px;
+      }
+
+      .container .gender {
+        margin: 20px 35px;
+      }
+
+      .container .gender h2,
+      .container .gender input {
+        display: inline-block;
+      }
+
+      .container .gender h2 {
+        margin-right: 50px;
+      }
+
+      .container .gender #female {
+        margin-left: 25px;
+      }
+
+      .container .gender #checkbox {
+        margin-left: 85px;
+      }
+
+      .container #storeButton {
+        position: relative;
+        left: 20%;
+        border: 1px solid blue;
+        border-radius: 8px;
+        visibility: hidden;
+        width: 150px;
+      }
+
+      .container #storeButton:hover {
+        background: blue;
+      }
+
+      .container #submitButton {
+        position: relative;
+        left: 30%;
+        border: 1px solid blue;
+        border-radius: 8px;
+        visibility: hidden;
+        width: 150px;
+      }
+
+      .container #submitButton:hover {
+        background: blue;
+      }
+
+      #output {
+        max-width: 1200px;
+        margin: auto;
+        visibility: hidden;
+      }
+
+      table {
+        border-collapse: collapse;
+        text-align: center;
+        color: white;
+        font: italic;
+      }
+
+      th {
+        background: blue;
+        font-family: cursive;
+        letter-spacing: 2px;
+        font-size: 25px;
+      }
+
+      tr,
+      th {
+        border: 1px solid black;
+        width: 200px;
+        padding: 5px;
+      }
+
+      tr td {
+        border: 1px solid black;
+        font-family: monospace;
+        font-size: 25px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="formHeading">
+      <h2>Registration Form</h2>
+    </div>
+    <div class="container">
+      <form class="myForm">
+        <div class="name">
+          <h2>Name:</h2>
+          <input id="firstName" type="text" placeholder="First_Name" />
+          <input id="secondName" type="text" placeholder="Second_Name" />
+        </div>
+        <div class="email">
+          <h2>Email:</h2>
+          <input id="email" type="text" placeholder="Email" />
+        </div>
+        <div class="password">
+          <h2>Password:</h2>
+          <input
+            id="passwordOne"
+            type="password"
+            placeholder="New Password: "
+          />
+          <input
+            id="passwordTwo"
+            type="password"
+            placeholder="Confirm Password"
+          />
+        </div>
+        <div class="gender">
+          <h2>Gender:</h2>
+          <input type="radio" name="gender" id="male" />Male
+          <input type="radio" name="gender" id="female" />Female
+          <input
+            id="checkbox"
+            onclick="showSubmit(checkbox)"
+            type="checkbox"
+          />I am not Robot
+        </div>
+
+        <span
+          ><input
+            id="storeButton"
+            type="button"
+            onclick="formSubmission(firstName, secondName, email, passwordOne, passwordTwo, male, female)"
+            value="store"
+        /></span>
+
+        <input
+          id="submitButton"
+          type="button"
+          onclick="showOutput()"
+          value="Submit"
+        />
+      </form>
+    </div>
+
+    <div id="output">
+      <table>
+        <tr id="tr1">
+          <th>First Name</th>
+          <th>Second Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Gender</th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      //********************** If If-else Statement ********************
+
+      var firstName = [];
+      var secondName = [];
+      var userEmail = [];
+      var userPassword = [];
+      var gender = [];
+      const formSubmission = (
+        fName,
+        sName,
+        email,
+        pswd,
+        cpswd,
+        male,
+        female
+      ) => {
+        if (
+          fName.value &&
+          sName.value &&
+          email.value &&
+          pswd.value &&
+          cpswd.value
+        ) {
+          if (
+            fName.value.length <= 10 &&
+            sName.value.length <= 10 &&
+            pswd.value.length >= 8 &&
+            cpswd.value.length >= 8
+          ) {
+            if (
+              fName.value.match(/^[A-Za-z]+$/) &&
+              sName.value.match(/^[A-Za-z]+$/) &&
+              email.value.indexOf("@") > -1 &&
+              email.value.indexOf(".") > -1
+            ) {
+              firstName.push(fName.value);
+              secondName.push(sName.value);
+              userEmail.push(email.value);
+            } else {
+              if (!fName.value.match(/^[A-Za-z]+$/)) {
+                return alert(`First Name need just characters!`);
+              } else if (!sName.value.match(/^[A-Za-z]+$/)) {
+                return alert(`Second Name need just characters!`);
+              } else if (
+                !email.value.indexOf("@") > -1 &&
+                email.value.indexOf(".") > -1
+              ) {
+                return alert(`Please enter the valid email!`);
+              }
+            }
+            if (pswd.value == cpswd.value) {
+              userPassword.push(pswd.value);
+            } else {
+              return alert("Both password fields should have same items!");
+            }
+          } else {
+            if (!(fName.value.length <= 10)) {
+              return alert(`First Name need length of just 10 characters!`);
+            }
+            if (!(sName.value.length <= 10)) {
+              return alert(`Second Name need length of just 10 characters!`);
+            }
+            if (!(pswd.value.length >= 8) || !(cpswd.value.length >= 8)) {
+              return alert(`Password must contain 8 or more characters!`);
+            }
+          }
+        } else {
+          if (!fName.value) {
+            return alert(`Please fill the area of first Name!`);
+          } else if (!sName.value) {
+            return alert(`Please fill the area of second Name!`);
+          } else if (!email.value) {
+            return alert(`Please fill the area of email!`);
+          } else if (!pswd.value) {
+            return alert(`Please fill the area of New Password!`);
+          } else if (!cpswd.value) {
+            return alert(`Please fill the area of Confirm Password!`);
+          }
+        }
+        if (male.checked) {
+          gender.push("Male");
+        } else if (female.checked) {
+          gender.push("Female");
+        } else {
+          return alert(`Please select the option of male or female!`);
+        }
+
+        var tbl = document.querySelector("table");
+        var tr1 = document.createElement("tr");
+
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+
+        td1.innerHTML = firstName;
+        td2.innerHTML = secondName;
+        td3.innerHTML = userEmail;
+        td4.innerHTML = userPassword;
+        td5.innerHTML = gender;
+
+        tr1.appendChild(td1);
+        tr1.appendChild(td2);
+        tr1.appendChild(td3);
+        tr1.appendChild(td4);
+        tr1.appendChild(td5);
+
+        tbl.appendChild(tr1);
+      };
+
+      var clearButton = document.querySelector("span");
+      var inputs1 = document.querySelectorAll("input[type=text]");
+      var inputs2 = document.querySelectorAll("input[type=email]");
+      var inputs3 = document.querySelectorAll("input[type=password]");
+      clearButton.addEventListener("click", () => {
+        inputs1.forEach((input) => {
+          input.value = "";
+        });
+        inputs2.forEach((input) => {
+          input.value = "";
+        });
+        inputs3.forEach((input) => {
+          input.value = "";
+        });
+      });
+
+      const showSubmit = (button) => {
+        var btn1 = document.getElementById("submitButton");
+        var btn2 = document.getElementById("storeButton");
+        if (button.checked) {
+          btn1.style.visibility = "visible";
+          btn2.style.visibility = "visible";
+        } else {
+          btn1.style.visibility = "hidden";
+          btn2.style.visibility = "hidden";
+        }
+      };
+
+      const showOutput = () => {
+        document.getElementById("output").style.visibility = "visible";
+      };
+    </script>
+  </body>
+</html>

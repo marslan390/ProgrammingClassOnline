@@ -1,0 +1,122 @@
+<html>
+  <body>
+    <h2>Today Agenda</h2>
+    <ul>
+      <li>Recall Javascript Concepts</li>
+    </ul>
+    <h2>Next Class</h2>
+    <ul>
+      <li>Reactjs</li>
+    </ul>
+  </body>
+  <script>
+    // Self invoke function
+    (() => {
+      // Object and Array destructuring
+
+      const consoleUserProfile = (userProfile) => {
+        console.log(
+          userProfile.firstName,
+          userProfile.lastName,
+          userProfile.email,
+          "Without destructuring"
+        );
+        // destructuring is heppening below  which intoduces ES6
+        // userProfile.phoneNumber, userPofile["phoneNumber"]
+        const {
+          firstName,
+          lastName,
+          email,
+          phoneNumber = "03336280", // default value
+        } = userProfile;
+        console.log(
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          "with destructuring"
+        );
+      };
+
+      const consoleUserProfileWithMultipleParams = (
+        firstName,
+        lastName,
+        email,
+        phoneNumber = "03336280",
+        newBooleanParam = true
+      ) => {
+        console.log(
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          "with destructuring"
+        );
+      };
+
+      const consoleUserProfileWithParamDestruct = ({
+        firstName,
+        lastName,
+        email,
+        phoneNumber = "03336280",
+      }) => {
+        console.log(
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          "with destructuring with rest params"
+        );
+      };
+
+      const userProfile = {
+        firstName: "Arslan",
+        lastName: "Sajid",
+        email: "test@gmail.com",
+        phoneNumber: "0300",
+        tempAddress: "abc",
+        permAdddress: "xyb",
+        extraParam: "extra",
+      };
+
+      //consoleUserProfile(userProfile);
+      consoleUserProfileWithParamDestruct(userProfile);
+      /*consoleUserProfileWithMultipleParams(
+        userProfile.firstName,
+        userProfile.lastName,
+        userProfile.email,
+        undefined,
+        false
+      );*/
+
+      // Array destructuring
+      const userProfileArray = ["Arslan", "Sajid", "test@gmail.com"];
+      const [firstName, surname, email, phoneNumber] = userProfileArray;
+      console.log(
+        firstName,
+        surname,
+        email,
+        phoneNumber,
+        "with array destructuring"
+      );
+
+      // function returning array
+      const useValue = (defaultValue) => {
+        const setValue = () => {
+          console.log("setValue function called");
+        };
+        return [defaultValue, setValue, { testKey: "Test Value" }, true];
+      };
+      //const value = useValue("inital value");
+      //console.log(value);
+      const [value, set] = useValue("2nd Initial");
+      console.log(value, "-------", set);
+      set();
+
+      const [value2, setValue2, test] = useValue("3rd inital");
+      console.log(value2, setValue2, test);
+      const [value3, , , boolValue] = useValue("4rth inital");
+      console.log(value3, boolValue);
+    })();
+  </script>
+</html>

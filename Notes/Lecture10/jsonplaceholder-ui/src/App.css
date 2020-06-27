@@ -1,0 +1,16 @@
+.header {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  background-color: #1b75d3;
+  color: #fff;
+}
+
+.content {
+  width: 100vw;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px;
+}

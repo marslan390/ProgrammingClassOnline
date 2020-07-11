@@ -1,5 +1,6 @@
 import React from "react";
 import { User } from "./User";
+import userData from "./userData";
 
 const style = {
   userList: {
@@ -18,16 +19,12 @@ const style = {
   },
 };
 
-const UserList = ({ userList = [], onUserClick }) => {
+const UserList = () => {
   return (
     <div style={style.userList}>
-      {userList.map((user) => {
+      {userData.map((user) => {
         return (
-          <div
-            style={style.user}
-            key={user.id}
-            onClick={(e) => onUserClick(user.id)}
-          >
+          <div style={style.user} key={user.id}>
             <User user={user} />
           </div>
         );

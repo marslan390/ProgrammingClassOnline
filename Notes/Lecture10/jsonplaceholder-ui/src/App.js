@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserList } from "./components/User/UserList";
 import { UserDetail } from "./components/User/UserDetail";
 import "./App.css";
 import userList from "./components/User/userData";
+import axios from "axios";
 
 const useStyles = () => {
   return {
@@ -48,9 +49,32 @@ const newUser = {
 const App = () => {
   const styles = useStyles();
   const [selectedUser, setSelectedUser] = useState(null);
-  const [users, setUsers] = useState(userList);
+  const [users, setUsers] = useState([]);
+  // first param of useEffect is a callback
+  // end param of useEffect is a dependency Array
+  // if we want to run useEffect only once then pass and empty dependency array
+  useEffect(() => {
+    console.log("this would call only once due to empty dependency array");
+    const getUsers = async () => {
+      const response = await axios({
+        method: "get",
+        baseURL: "https://jsonplaceholder.typicode.com/",
+        url: "users",
+      });
+      const { data, status } = response;
+      if (status === 200) {
+        // Status OK
+        setUsers(data);
+        //setTimeout(() => setUsers(data), 3000); // using timeout for artificial delay
+      }
+    };
+    getUsers();
+  }, []);
+  useEffect(() => {
+    console.log("calling on each render.");
+  });
   const selectUser = (userId) => {
-    const user = userList.find((user) => user.id === userId);
+    const user = users.find((user) => user.id === userId);
     setSelectedUser(user);
   };
   const onUserSubmit = (user) => {
@@ -74,20 +98,24 @@ const App = () => {
       <header>
         <div className="header">Jsonplaceholder UI</div>
       </header>
-      <div style={styles.content}>
-        <div style={styles.userList}>
-          <div style={styles.newUser}>
-            <button onClick={onNewUserClick}>Add New User</button>
+      {users.length === 0 ? (
+        <h2>Loading....</h2>
+      ) : (
+        <div style={styles.content}>
+          <div style={styles.userList}>
+            <div style={styles.newUser}>
+              <button onClick={onNewUserClick}>Add New User</button>
+            </div>
+            <h1 style={styles.heading}>Total Users: {users.length}</h1>
+            <UserList userList={users} onUserClick={selectUser} />
           </div>
-          <h1 style={styles.heading}>Total Users: {userList.length}</h1>
-          <UserList userList={users} onUserClick={selectUser} />
+          <div style={styles.userDetail}>
+            {selectedUser && (
+              <UserDetail user={selectedUser} onUserSubmit={onUserSubmit} />
+            )}
+          </div>
         </div>
-        <div style={styles.userDetail}>
-          {selectedUser && (
-            <UserDetail user={selectedUser} onUserSubmit={onUserSubmit} />
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
